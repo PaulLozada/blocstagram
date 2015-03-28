@@ -19,14 +19,41 @@
 
 @implementation BLCImagesTableViewController
 
+
+- (void) infiniteScrollIfNecessary {
+    NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
+    
+    if (bottomIndexPath && bottomIndexPath.row == [BLCDatasource sharedInstance].mediaItems.count - 1) {
+        // The very last cell is on screen
+        [[BLCDatasource sharedInstance] requestOldItemsWithCompletionHandler:nil];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self infiniteScrollIfNecessary];
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
     [[BLCDatasource sharedInstance]addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
+    
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
   
     [self.tableView registerClass:[BLCMediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 
+    
+}
+
+-(void)refreshControlDidFire:(UIRefreshControl *)sender{
+    [[BLCDatasource sharedInstance]requestNewItemsWithCompletionHandler:^(NSError *error) {
+        [sender endRefreshing];
+    }];
+    
 }
 
 -(void)dealloc{
@@ -43,7 +70,9 @@
         if (kindOfChange == NSKeyValueChangeSetting) {
             
             [self.tableView reloadData];
-        } else if (kindOfChange == NSKeyValueChangeInsertion ||
+        }
+        
+        else if (kindOfChange == NSKeyValueChangeInsertion ||
                       kindOfChange == NSKeyValueChangeRemoval ||
                    kindOfChange == NSKeyValueChangeReplacement) {
             

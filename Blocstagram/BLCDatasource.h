@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @class BLCMedia;
+
+typedef void (^BLCNewItemCompletionBlock)(NSError *error);
+
 
 @interface BLCDatasource : NSObject
 
@@ -15,8 +19,10 @@
 
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 
+
 -(void)deleteMediaItem:(BLCMedia *)item;
 
-
+-(void) requestNewItemsWithCompletionHandler: (BLCNewItemCompletionBlock)completionHandler;
+- (void) requestOldItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
 
 @end
