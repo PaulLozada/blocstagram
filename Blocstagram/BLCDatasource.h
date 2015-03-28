@@ -25,4 +25,5 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 -(void) requestNewItemsWithCompletionHandler: (BLCNewItemCompletionBlock)completionHandler;
 - (void) requestOldItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler;
 
+
 @end

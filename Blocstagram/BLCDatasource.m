@@ -29,6 +29,21 @@
 
 @implementation BLCDatasource
 
+- (NSString *) randomSentenceWithMaximumNumberOfWords:(NSUInteger) numberOfWords {
+    NSUInteger wordCount = arc4random_uniform(20);
+    
+    NSMutableString *randomSentence = [[NSMutableString alloc] init];
+    
+    for (int i  = 0; i <= wordCount; i++) {
+        NSString *randomWord = [self randomStringOfLength:arc4random_uniform(12)];
+        if (randomWord.length > 0) {
+            [randomSentence appendFormat:@"%@ ", randomWord];
+        }
+    }
+    
+    return randomSentence;
+}
+
 - (void) requestOldItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler {
     if (self.isLoadingOlderItems == NO) {
         self.isLoadingOlderItems = YES;

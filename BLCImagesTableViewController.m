@@ -13,12 +13,20 @@
 #import "BLCComment.h"
 #import "BLCMediaTableViewCell.h"
 
-@interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @end
 
 @implementation BLCImagesTableViewController
 
+#pragma mark  - Assignment Answer
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+
+    
+    [self infiniteScrollIfNecessary];
+    NSLog(@"test");
+}
 
 - (void) infiniteScrollIfNecessary {
     NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
@@ -31,9 +39,11 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self infiniteScrollIfNecessary];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    
+//    [self infiniteScrollIfNecessary];
+//
+//}
 
 - (void)viewDidLoad {
     
