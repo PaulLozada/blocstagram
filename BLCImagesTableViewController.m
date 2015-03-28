@@ -25,7 +25,6 @@
 
     
     [self infiniteScrollIfNecessary];
-    NSLog(@"test");
 }
 
 - (void) infiniteScrollIfNecessary {
