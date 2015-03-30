@@ -8,25 +8,56 @@
 
 #import "AppDelegate.h"
 #import "BLCImagesTableViewController.h"
+#import "BLCLoginViewController.h"
+#import "BLCDatasource.h"
+
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) UINavigationController *nav;
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[[BLCImagesTableViewController alloc]init]];
     
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    [BLCDatasource sharedInstance]; // create the data source (so it can receive the access token notification)
+    
+#pragma mark - Assignment Answer
+    
+    UINavigationController *navVC = [[UINavigationController alloc] init];
+    BLCLoginViewController *loginVC = [[BLCLoginViewController alloc] init];
+    
+    // Create Title for loginVC
+    loginVC.title = @"Login";
+    
+    [navVC setViewControllers:@[loginVC] animated:YES];
+
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
+        [navVC setViewControllers:@[imagesVC] animated:YES];
+    }];
+    
+    self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
    
-    
+    self.nav = navVC;
+
     return YES;
+    
 }
+
+-(void)buttonPressed: (UIBarButtonItem *)buttonPressed{
+    
+    
+    NSLog(@"%@",self.nav);
+    
+    [self.window setRootViewController:self.nav];
+    
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
