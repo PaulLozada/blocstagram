@@ -114,7 +114,14 @@
 }
 
 
-
+- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    BLCMedia *item = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
+    if (item.image) {
+        return 350;
+    } else {
+        return 150;
+    }
+}
 
 
 
