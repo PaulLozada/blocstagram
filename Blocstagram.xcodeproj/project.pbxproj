@@ -30,6 +30,8 @@
 		333D34361AC5CF9A00D22AFD /* BLCDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D34351AC5CF9A00D22AFD /* BLCDatasource.m */; };
 		333D34391AC5D1F300D22AFD /* BLCMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D34381AC5D1F300D22AFD /* BLCMediaTableViewCell.m */; };
 		33A7298E1AC7744600DA60B7 /* BLCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A7298D1AC7744600DA60B7 /* BLCLoginViewController.m */; };
+		33BBA2951ACB754000E99E23 /* BLCMediaFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BBA2941ACB754000E99E23 /* BLCMediaFullScreenViewController.m */; };
+		33BBA2981ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BBA2971ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.m */; };
 		6EA77716FB514F0502B91003 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D4E74604BA7F6BFD7995B8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,10 @@
 		333D34381AC5D1F300D22AFD /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLCMediaTableViewCell.m; path = ../BLCMediaTableViewCell.m; sourceTree = "<group>"; };
 		33A7298C1AC7744600DA60B7 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
 		33A7298D1AC7744600DA60B7 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
+		33BBA2931ACB754000E99E23 /* BLCMediaFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaFullScreenViewController.h; sourceTree = "<group>"; };
+		33BBA2941ACB754000E99E23 /* BLCMediaFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaFullScreenViewController.m; sourceTree = "<group>"; };
+		33BBA2961ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCMediaFullScreenAnimator.h; sourceTree = "<group>"; };
+		33BBA2971ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCMediaFullScreenAnimator.m; sourceTree = "<group>"; };
 		49D4E74604BA7F6BFD7995B8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		780D0CEFDDE4E9DBF9901AF2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,8 +135,12 @@
 			children = (
 				333D34371AC5D1F300D22AFD /* BLCMediaTableViewCell.h */,
 				333D34381AC5D1F300D22AFD /* BLCMediaTableViewCell.m */,
+				33BBA2931ACB754000E99E23 /* BLCMediaFullScreenViewController.h */,
+				33BBA2941ACB754000E99E23 /* BLCMediaFullScreenViewController.m */,
 				333D34281AC5B9E400D22AFD /* BLCImagesTableViewController.h */,
 				333D34291AC5B9E400D22AFD /* BLCImagesTableViewController.m */,
+				33BBA2961ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.h */,
+				33BBA2971ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.m */,
 				333D342E1AC5CE9700D22AFD /* BLCMedia.h */,
 				333D342F1AC5CE9700D22AFD /* BLCMedia.m */,
 				333D34311AC5CEE000D22AFD /* BLCComment.h */,
@@ -357,11 +367,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				333D342D1AC5CE3C00D22AFD /* BLCUser.m in Sources */,
+				33BBA2981ACB8EF700E99E23 /* BLCMediaFullScreenAnimator.m in Sources */,
 				333D33F01AC5B83F00D22AFD /* AppDelegate.m in Sources */,
 				333D33ED1AC5B83F00D22AFD /* main.m in Sources */,
 				333D342A1AC5B9E400D22AFD /* BLCImagesTableViewController.m in Sources */,
 				333D34361AC5CF9A00D22AFD /* BLCDatasource.m in Sources */,
 				333D34301AC5CE9700D22AFD /* BLCMedia.m in Sources */,
+				33BBA2951ACB754000E99E23 /* BLCMediaFullScreenViewController.m in Sources */,
 				333D34391AC5D1F300D22AFD /* BLCMediaTableViewCell.m in Sources */,
 				333D34331AC5CEE000D22AFD /* BLCComment.m in Sources */,
 				33A7298E1AC7744600DA60B7 /* BLCLoginViewController.m in Sources */,

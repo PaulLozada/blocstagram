@@ -56,13 +56,13 @@ NSString *const BLCLoginViewControllerDidGetAccessTokenNotification = @"BLCLogin
     
     // Do any additional setup after loading the view.
     // Creating the back button bar item
+    
     UIBarButtonItem *bar = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(buttonPressed:)];
     bar.title = @"Back";
     [self.navigationItem setLeftBarButtonItem:bar];
     [self.navigationItem.leftBarButtonItem setEnabled:NO];
 
 }
-
 
 
 -(void)dealloc {
