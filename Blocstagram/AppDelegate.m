@@ -10,53 +10,74 @@
 #import "BLCImagesTableViewController.h"
 #import "BLCLoginViewController.h"
 #import "BLCDatasource.h"
+#import "BLCMediaTableViewCell.h"
 
 
 @interface AppDelegate ()
-@property (nonatomic, strong) UINavigationController *nav;
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+   
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     
     [BLCDatasource sharedInstance]; // create the data source (so it can receive the access token notification)
     
+    
 #pragma mark - Assignment Answer
-    
-    UINavigationController *navVC = [[UINavigationController alloc] init];
-    BLCLoginViewController *loginVC = [[BLCLoginViewController alloc] init];
-    
-    // Create Title for loginVC
-    loginVC.title = @"Login";
-    
-    [navVC setViewControllers:@[loginVC] animated:YES];
 
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-        BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
-        [navVC setViewControllers:@[imagesVC] animated:YES];
-    }];
+    UINavigationController *navVC = [[UINavigationController alloc] init];
+    
+    
+    if  (![BLCDatasource sharedInstance].accessToken) {
+           BLCLoginViewController *loginVC      = [[BLCLoginViewController alloc] init];
+        
+        // Create Title for loginVC
+        loginVC.title  = @"Login";
+        [navVC setViewControllers:@[loginVC] animated:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            
+            BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
+            imagesVC.refreshControl = [[UIRefreshControl alloc]init];
+      
+            [navVC setViewControllers:@[imagesVC] animated:YES];
+            
+        }];
+    } else{
+        
+    
+        
+        
+        BLCImagesTableViewController *imagesVC =
+        [[BLCImagesTableViewController alloc]init];
+        
+    
+        
+        
+        
+        
+        [imagesVC.tableView reloadData];
+        
+            [navVC setViewControllers:@[imagesVC] animated:YES];
+        }
+        
+    
+
+    
+ 
     
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
    
-    self.nav = navVC;
 
     return YES;
     
 }
 
--(void)buttonPressed: (UIBarButtonItem *)buttonPressed{
-    
-    
-    NSLog(@"%@",self.nav);
-    
-    [self.window setRootViewController:self.nav];
-    
-}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
