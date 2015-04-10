@@ -11,7 +11,11 @@
 @class BLCUser;
 
 
+<<<<<<< HEAD
 @interface BLCComment : NSObject<NSCoding>
+=======
+@interface BLCComment : NSObject <NSCoding>
+>>>>>>> full-screen-images
 
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) BLCUser *from;

@@ -12,12 +12,97 @@
 #import "BLCUser.h"
 #import "BLCComment.h"
 #import "BLCMediaTableViewCell.h"
+#import "BLCMediaFullScreenViewController.h"
+#import "BLCMediaFullScreenAnimator.h"
 
-@interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,BLCMediaTableViewCellDelegate,UIViewControllerTransitioningDelegate>
+
+@property(nonatomic,weak) UIImageView *lastTappedImageView;
 
 @end
 
 @implementation BLCImagesTableViewController
+
+
+
+- (void) cell:(BLCMediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView {
+    NSMutableArray *itemsToShare = [NSMutableArray array];
+    
+    if (cell.mediaItem.caption.length > 0) {
+        [itemsToShare addObject:cell.mediaItem.caption];
+    }
+    
+    if (cell.mediaItem.image) {
+        [itemsToShare addObject:cell.mediaItem.image];
+    }
+    
+    if (itemsToShare.count > 0) {
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
+}
+
+
+
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+
+    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
+    animator.presenting = YES;
+    animator.cellImageView = self.lastTappedImageView;
+    return animator;
+}
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    BLCMediaFullScreenAnimator *animator = [BLCMediaFullScreenAnimator new];
+    animator.cellImageView = self.lastTappedImageView;
+    return animator;
+}
+
+
+#pragma mark - BLCMediaTableViewCellDelegate
+
+- (void) cell:(BLCMediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
+    
+    self.lastTappedImageView = imageView;
+    
+    BLCMediaFullScreenViewController *fullScreenVC = [[BLCMediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//    [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
+//    button.tintColor = [UIColor blackColor];
+//    button.titleLabel.text = @"Test";
+    
+//    [button setFrame:CGRectMake(0, 0, 568, 100)];
+//    [fullScreenVC.view addSubview:button];
+    fullScreenVC.transitioningDelegate = self;
+    fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
+
+    [self presentViewController:fullScreenVC animated:YES completion:nil];
+    
+    
+}
+
+
+-(void)pressedDisclosure:(UIButton *)sender{
+
+    NSLog(@"Test");
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"what" message:@"what" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Other", nil];
+    [alert show];
+    
+    NSString *name = @"Paull";
+    NSArray *array = [NSArray arrayWithObjects:name, nil];
+    
+    
+    UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:array applicationActivities:nil];
+    [self presentViewController:activity animated:YES completion:nil];
+    
+    
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"TEST "message:@"It Works" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Cancel", nil];
+//    [alert show];
+}
 
 #pragma mark  - Assignment Answer
 
@@ -159,6 +244,7 @@
     
     
     BLCMediaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+    cell.delegate = self;
     cell.mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
 
     

@@ -10,6 +10,7 @@
 
 @implementation BLCUser
 
+<<<<<<< HEAD
 #pragma mark -NSCoding
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
@@ -23,10 +24,18 @@
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
+=======
+#pragma mark - NSCoding
+
+
+
+-(instancetype) initWithCoder:(NSCoder *)aDecoder {
+>>>>>>> full-screen-images
     
     self = [super init];
     
     if (self) {
+<<<<<<< HEAD
         self.idNumber = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(idNumber))];
         self.userName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(userName))];
         self.fullName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(fullName))];
@@ -36,6 +45,44 @@
     }
     return self;
 }
+=======
+        
+        self.idNumber = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(idNumber))];
+        
+        self.userName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(userName))];
+        
+        self.fullName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(fullName))];
+        
+        self.profilePicture = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(profilePicture))];
+        
+        self.profilePictureURL = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(profilePictureURL))];
+    }
+    
+    return self;
+    
+}
+
+
+
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:self.idNumber forKey:NSStringFromSelector(@selector(idNumber))];
+    [aCoder encodeObject:self.userName forKey:NSStringFromSelector(@selector(userName))];
+    [aCoder encodeObject:self.fullName forKey:NSStringFromSelector(@selector(fullName))];
+    [aCoder encodeObject:self.profilePicture forKey:NSStringFromSelector(@selector(profilePicture))];
+    [aCoder encodeObject:self.profilePictureURL forKey:NSStringFromSelector(@selector(profilePictureURL))];
+}
+
+
+
+
+
+
+
+
+
+>>>>>>> full-screen-images
 
 -(instancetype)initWithDictionary:(NSDictionary *)userDictionary{
     

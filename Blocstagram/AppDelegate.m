@@ -25,6 +25,7 @@
     
     [BLCDatasource sharedInstance]; // create the data source (so it can receive the access token notification)
     
+<<<<<<< HEAD
     
 #pragma mark - Assignment Answer
 
@@ -72,6 +73,30 @@
 
     
  
+=======
+    
+    UINavigationController *navVC = [[UINavigationController alloc] init];
+    
+    if (![BLCDatasource sharedInstance].accessToken) {
+    
+        BLCLoginViewController *loginVC = [[BLCLoginViewController alloc] init];
+        loginVC.title = @"Login";
+        [navVC setViewControllers:@[loginVC] animated:YES];
+        
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
+        [navVC setViewControllers:@[imagesVC] animated:YES];
+    }];
+        
+    } else{
+        
+        BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc]init];
+        [navVC setViewControllers:@[imagesVC] animated:YES];
+        
+    }
+>>>>>>> full-screen-images
     
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
