@@ -25,7 +25,6 @@
     
     [BLCDatasource sharedInstance]; // create the data source (so it can receive the access token notification)
     
-<<<<<<< HEAD
     
 #pragma mark - Assignment Answer
 
@@ -73,7 +72,6 @@
 
     
  
-=======
     
     UINavigationController *navVC = [[UINavigationController alloc] init];
     
@@ -96,7 +94,6 @@
         [navVC setViewControllers:@[imagesVC] animated:YES];
         
     }
->>>>>>> full-screen-images
     
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];

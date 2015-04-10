@@ -10,7 +10,6 @@
 
 @implementation BLCUser
 
-<<<<<<< HEAD
 #pragma mark -NSCoding
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
@@ -24,18 +23,15 @@
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
-=======
 #pragma mark - NSCoding
 
 
 
 -(instancetype) initWithCoder:(NSCoder *)aDecoder {
->>>>>>> full-screen-images
     
     self = [super init];
     
     if (self) {
-<<<<<<< HEAD
         self.idNumber = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(idNumber))];
         self.userName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(userName))];
         self.fullName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(fullName))];
