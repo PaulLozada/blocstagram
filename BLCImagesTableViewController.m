@@ -69,13 +69,13 @@
     self.lastTappedImageView = imageView;
     
     BLCMediaFullScreenViewController *fullScreenVC = [[BLCMediaFullScreenViewController alloc] initWithMedia:cell.mediaItem];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
-    button.tintColor = [UIColor greenColor];
-    button.titleLabel.text = @"Test";
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//    [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
+//    button.tintColor = [UIColor blackColor];
+//    button.titleLabel.text = @"Test";
     
-    [button setFrame:CGRectMake(0, 0, 568, 100)];
-    [fullScreenVC.view addSubview:button];
+//    [button setFrame:CGRectMake(0, 0, 568, 100)];
+//    [fullScreenVC.view addSubview:button];
     fullScreenVC.transitioningDelegate = self;
     fullScreenVC.modalPresentationStyle = UIModalPresentationCustom;
 
@@ -87,17 +87,21 @@
 
 -(void)pressedDisclosure:(UIButton *)sender{
 
-    NSMutableArray *itemsToShare = [NSMutableArray array];
-    NSString *text = @"text";
-   [ itemsToShare addObject:text];
-
+    NSLog(@"Test");
     
-    if (itemsToShare.count >= 0 ) {
-        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
-        [self presentViewController:activityVC animated:YES completion:nil];
-    }
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"what" message:@"what" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Other", nil];
+    [alert show];
+    
+    NSString *name = @"Paull";
+    NSArray *array = [NSArray arrayWithObjects:name, nil];
     
     
+    UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:array applicationActivities:nil];
+    [self presentViewController:activity animated:YES completion:nil];
+    
+    
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"TEST "message:@"It Works" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Cancel", nil];
+//    [alert show];
 }
 
 #pragma mark  - Assignment Answer

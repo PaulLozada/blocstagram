@@ -89,12 +89,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+-(void)pressedDisclosure:(UIButton *)sender{
+    
+    NSArray *array = [NSArray arrayWithObjects:@"Test", nil];
+    UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:array applicationActivities:nil];
+    [self presentViewController:activity animated:YES completion:nil];
+    
+    NSLog(@"Test");
+}
 
 -(void)doubleTapFired: (UITapGestureRecognizer *)sender{
     
     if (self.scrollView.zoomScale == self.scrollView.minimumZoomScale) {
         
         CGPoint locationPoint = [sender locationInView:self.imageView];
+        
+        
+   
+        
+        
+        
         
         CGSize scrollViewSize = self.scrollView.bounds.size;
         
@@ -111,6 +125,21 @@
 
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
+    button.tintColor = [UIColor blackColor];
+    [button setTitle:@"Share" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.view addSubview:button];
+
+    [button setFrame:CGRectMake(0, 0, 568, 100)];
+
+    
+    
+    
+    
+    
     self.scrollView.frame = self.view.bounds;
     
     CGSize scrollViewFrameSize = self.scrollView.frame.size;

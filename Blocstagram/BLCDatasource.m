@@ -322,6 +322,7 @@
     self = [super init];
     
     if (self) {
+        
         self.accessToken = [UICKeyChainStore stringForKey:@"access token"];
         
         if (!self.accessToken) {
@@ -338,16 +339,23 @@
                         [self willChangeValueForKey:@"mediaItems"];
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
+                        
+                        for (BLCMedia* mediaItem in self.mediaItems) {
+                            if (!mediaItem.image) {
+                                [self downloadImageForMediaItem:mediaItem];
+                            }
+                        }
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
                     }
                 });
             });
         }
+        
     }
-    
     return self;
 }
+
 
 - (void) registerForAccessTokenNotification {
     [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
