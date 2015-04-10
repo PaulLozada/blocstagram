@@ -128,6 +128,7 @@
     }
 }
 
+
 - (void) parseDataFromFeedDictionary:(NSDictionary *) feedDictionary fromRequestWithParameters:(NSDictionary *)parameters {
     
     
@@ -141,6 +142,7 @@
         if (mediaItem) {
             [tmpMediaItems addObject:mediaItem];
             [self downloadImageForMediaItem:mediaItem];
+            
         
         }
         
@@ -235,34 +237,36 @@
 
 
 - (void) requestNewItemsWithCompletionHandler:(BLCNewItemCompletionBlock)completionHandler {
-   
+    
     
     self.thereAreNoMoreOlderMessages = NO;
-
+    
     
     if (self.isRefreshing == NO) {
         self.isRefreshing = YES;
-    
+        
         
         NSString *minID = [[self.mediaItems firstObject] idNumber];
         
         if (minID) {
             
-         NSDictionary *parameters = @{@"min_id": minID};
-        
-        
-        
-        [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
-            self.isRefreshing = NO;
+            NSDictionary *parameters = @{@"min_id": minID};
             
-            if (completionHandler) {
+            
+            
+            [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
+                self.isRefreshing = NO;
                 
-                self.isRefreshing = YES;
-            }
-        }];
-    
+                if (completionHandler) {
+                    completionHandler(error);
+                    self.isRefreshing = NO;
+                }
+            }];
+            
+        } else {
+            self.isRefreshing = NO;
         }
-}
+    }
 
 }
 
@@ -342,18 +346,22 @@
                         [self willChangeValueForKey:@"mediaItems"];
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
+                        
+                        for (BLCMedia* mediaItem in self.mediaItems) {
+                            if (!mediaItem.image) {
+                                [self downloadImageForMediaItem:mediaItem];
+                            }
+                        }
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
                     }
                 });
             });
+        }
+        
     }
-    
-}
     return self;
-
 }
-
 - (void) registerForAccessTokenNotification {
     
     [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
@@ -362,6 +370,7 @@
         [UICKeyChainStore setString:self.accessToken forKey:@"access token"];
         // Got a token, populate the initial data
         [self populateDataWithParameters:nil completionHandler:nil];
+        
     }];
 }
 

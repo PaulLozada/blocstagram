@@ -49,18 +49,21 @@
         }];
     } else{
         
-    
+        [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+            
+            NSLog(@"Refreshed");
+        }];
         
         
         BLCImagesTableViewController *imagesVC =
         [[BLCImagesTableViewController alloc]init];
         
+        
+ 
+        
+        
     
-        
-        
-        
-        
-        [imagesVC.tableView reloadData];
+    
         
             [navVC setViewControllers:@[imagesVC] animated:YES];
         }
