@@ -24,9 +24,6 @@
 @property (nonatomic, assign) BOOL isLoadingOlderItems;
 @property (nonatomic, assign) BOOL thereAreNoMoreOlderMessages;
 
-
-
-
 @end
 
 @implementation BLCDatasource
@@ -38,14 +35,6 @@
     return dataPath;
 }
 
-
-
-- (NSString *) pathForFilename:(NSString *) filename {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths firstObject];
-    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
-    return dataPath;
-}
 
 
 - (void) downloadImageForMediaItem:(BLCMedia *)mediaItem {
@@ -191,10 +180,7 @@
     }
 
     if (tmpMediaItems.count > 0) {
-<<<<<<< HEAD
-        
-=======
->>>>>>> full-screen-images
+
         // Write the changes to disk
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
@@ -210,18 +196,13 @@
                 NSLog(@"Couldn't write file: %@", dataError);
             }
         });
-<<<<<<< HEAD
-=======
+
         
     }
     
     
 }
->>>>>>> full-screen-images
 
-}
-
-}
 #pragma mark - InstagramClientID
 
 +(NSString *)instagramClientID{
@@ -268,41 +249,27 @@
         NSString *minID = [[self.mediaItems firstObject] idNumber];
         
         if (minID) {
-<<<<<<< HEAD
             
             NSDictionary *parameters = @{@"min_id": minID};
             
-            
-            
-=======
-            NSDictionary *parameters = @{@"min_id": minID};
-            
->>>>>>> full-screen-images
             [self populateDataWithParameters:parameters completionHandler:^(NSError *error) {
                 self.isRefreshing = NO;
                 
                 if (completionHandler) {
                     completionHandler(error);
-<<<<<<< HEAD
                     self.isRefreshing = NO;
                 }
             }];
             
-        } else {
-            self.isRefreshing = NO;
-=======
-                }
-            }];
+        }
         } else {
             if (completionHandler) {
                 completionHandler(nil);
                 self.isRefreshing = YES;
             }
->>>>>>> full-screen-images
         }
-    }
-
 }
+
 
 
 #pragma mark - Key/Value Observing
@@ -396,11 +363,9 @@
     }
     return self;
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> full-screen-images
+
 - (void) registerForAccessTokenNotification {
     
     [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {

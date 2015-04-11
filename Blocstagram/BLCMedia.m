@@ -10,18 +10,14 @@
 #import "BLCUser.h"
 #import "BLCComment.h"
 
-<<<<<<< HEAD
-@implementation BLCMedia
 
 #pragma mark - NSCoding
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
-=======
+
 
 @implementation BLCMedia
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
->>>>>>> full-screen-images
     self = [super init];
     
     if (self) {
@@ -32,31 +28,18 @@
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
     }
-<<<<<<< HEAD
     return self;
 }
 
-
-
--(void)encodeWithCoder:(NSCoder *)aCoder{
-
-=======
-    
-    return self;
-}
 
 - (void) encodeWithCoder:(NSCoder *)aCoder {
->>>>>>> full-screen-images
     [aCoder encodeObject:self.idNumber forKey:NSStringFromSelector(@selector(idNumber))];
     [aCoder encodeObject:self.user forKey:NSStringFromSelector(@selector(user))];
     [aCoder encodeObject:self.mediaURL forKey:NSStringFromSelector(@selector(mediaURL))];
     [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
     [aCoder encodeObject:self.caption forKey:NSStringFromSelector(@selector(caption))];
     [aCoder encodeObject:self.comments forKey:NSStringFromSelector(@selector(comments))];
-<<<<<<< HEAD
     
-=======
->>>>>>> full-screen-images
 }
 
 

@@ -12,17 +12,13 @@
 
 @implementation BLCComment
 
-<<<<<<< HEAD
 #pragma mark - NSCoding
 
-=======
->>>>>>> full-screen-images
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     
     self = [super init];
     
     if (self) {
-<<<<<<< HEAD
         self.idNumber = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(idNumber))];
         self.text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
         self.from = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(from))];
@@ -35,28 +31,7 @@
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
     [aCoder encodeObject:self.from forKey:NSStringFromSelector(@selector(from))];
 }
-=======
-        
-        self.idNumber = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(idNumber))];
-        self.text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
-        self.from = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(from))];
-        
-    }
-    
-    return self;
-}
 
-
--(void)encodeWithCoder:(NSCoder *)aCoder{
-    
-    [aCoder encodeObject:self.idNumber forKey:NSStringFromSelector(@selector(idNumber))];
-    [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
-    [aCoder encodeObject:self.from forKey:NSStringFromSelector(@selector(from))];
-    
-}
-
-
->>>>>>> full-screen-images
 - (instancetype) initWithDictionary:(NSDictionary *)commentDictionary {
     self = [super init];
     

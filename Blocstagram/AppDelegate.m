@@ -73,7 +73,6 @@
     
  
     
-    UINavigationController *navVC = [[UINavigationController alloc] init];
     
     if (![BLCDatasource sharedInstance].accessToken) {
     
