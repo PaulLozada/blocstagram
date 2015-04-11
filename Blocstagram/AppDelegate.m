@@ -31,65 +31,34 @@
     
     UINavigationController *navVC = [[UINavigationController alloc] init];
     
-    
-    if  (![BLCDatasource sharedInstance].accessToken) {
-           BLCLoginViewController *loginVC      = [[BLCLoginViewController alloc] init];
-        
-        // Create Title for loginVC
-        loginVC.title  = @"Login";
-        [navVC setViewControllers:@[loginVC] animated:YES];
-        
-        [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-            
-            BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
-            imagesVC.refreshControl = [[UIRefreshControl alloc]init];
-      
-            [navVC setViewControllers:@[imagesVC] animated:YES];
-            
-        }];
-    } else{
-        
-        [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
-            
-            NSLog(@"Refreshed");
-        }];
-        
-        
-        BLCImagesTableViewController *imagesVC =
-        [[BLCImagesTableViewController alloc]init];
-        
-        
- 
-        
-        
-    
-    
-        
-            [navVC setViewControllers:@[imagesVC] animated:YES];
-        }
-        
-    
-
-    
- 
-    
-    
     if (![BLCDatasource sharedInstance].accessToken) {
     
         BLCLoginViewController *loginVC = [[BLCLoginViewController alloc] init];
         loginVC.title = @"Login";
         [navVC setViewControllers:@[loginVC] animated:YES];
         
+     
     
     
     [[NSNotificationCenter defaultCenter] addObserverForName:BLCLoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        
         BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc] init];
+        
+        [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+            NSLog(@"test");
+        }];
+        
         [navVC setViewControllers:@[imagesVC] animated:YES];
     }];
         
     } else{
         
         BLCImagesTableViewController *imagesVC = [[BLCImagesTableViewController alloc]init];
+        [[BLCDatasource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+            NSLog(@"test");
+        }];
+        
         [navVC setViewControllers:@[imagesVC] animated:YES];
         
     }
