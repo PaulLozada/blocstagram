@@ -18,10 +18,19 @@
 @interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,BLCMediaTableViewCellDelegate,UIViewControllerTransitioningDelegate>
 
 @property(nonatomic,weak) UIImageView *lastTappedImageView;
+@property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
+
 
 @end
 
 @implementation BLCImagesTableViewController
+
+#pragma mark - Double Tap Gesture
+
+-(void)twoFinger:(UIGestureRecognizer*)sender{
+    BLCDatasource *data = [[BLCDatasource alloc]init];
+    [data instagramOperationManager];
+}
 
 
 
@@ -222,6 +231,14 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+        
+        
+        
+        self.doubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(twoFinger:)];
+        self.doubleTap.numberOfTouchesRequired = 2;
+//        self.doubleTap.delegate = self;
+        [self.tableView addGestureRecognizer:self.doubleTap];
+
         // Custom initialization
         
     }

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFNetworking.h>
 
 @class BLCMedia;
 
@@ -21,6 +22,11 @@ typedef void (^BLCNewItemCompletionBlock)(NSError *error);
 
 @property (nonatomic, strong, readonly) NSArray *mediaItems;
 @property (nonatomic, strong, readonly) NSString *accessToken;
+
+#pragma mark - Temporary
+
+@property(nonatomic, strong,readonly) AFHTTPRequestOperationManager  *instagramOperationManager;
+
 
 
 -(void)deleteMediaItem:(BLCMedia *)item;

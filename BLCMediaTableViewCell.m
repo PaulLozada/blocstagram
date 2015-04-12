@@ -22,7 +22,9 @@
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+//@property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
 @property(nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+
 
 
 @end
@@ -42,8 +44,10 @@ static NSParagraphStyle *paragraphStyle;
 #pragma mark - Image View
 
 
+
 -(void)tapFired:(UITapGestureRecognizer *)sender {
     [self.delegate cell:self didTapImageView:self.mediaImageView];
+    NSLog(@"test");
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -54,10 +58,16 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) longPressFired:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
+        
         [self.delegate cell:self didLongPressImageView:self.mediaImageView];
     }
 }
 
+//-(void)twoFinger:(UIGestureRecognizer*)sender{
+//
+//
+//    NSLog(@"WHY NOT WORKING!!");
+//}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -67,15 +77,25 @@ static NSParagraphStyle *paragraphStyle;
         self.mediaImageView = [[UIImageView alloc] init];
         
         self.mediaImageView.userInteractionEnabled = YES;
+        self.mediaImageView.multipleTouchEnabled = YES;
+        
+        
         
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapFired:)];
         self.tapGestureRecognizer.delegate = self;
         [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
         
         
+//        self.doubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(twoFinger:)];
+//        self.doubleTap.numberOfTouchesRequired = 2;
+//        self.doubleTap.delegate = self;
+//        [self.mediaImageView addGestureRecognizer:self.doubleTap];
+        
+        
         self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressFired:)];
         self.longPressGestureRecognizer.delegate = self;
         [self.mediaImageView addGestureRecognizer:self.longPressGestureRecognizer];
+        
         
         
         
@@ -87,24 +107,24 @@ static NSParagraphStyle *paragraphStyle;
         for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
-
+            
         }
         
         NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel);
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]];
-
+        
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
-
+        
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]];
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]"
                                                                                  options:NSLayoutFormatAlignAllLeft
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
-    
-
+        
+        
         
         
         
@@ -226,7 +246,7 @@ static NSParagraphStyle *paragraphStyle;
     } else {
         self.imageHeightConstraint.constant = 0;
     }
-
+    
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
@@ -245,7 +265,7 @@ static NSParagraphStyle *paragraphStyle;
     
     // Make it adjust the image view and labels
     layoutCell.frame = CGRectMake(0, 0, width, CGRectGetHeight(layoutCell.frame));
-
+    
     [layoutCell setNeedsLayout];
     [layoutCell layoutIfNeeded];
     
@@ -262,7 +282,7 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:NO animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

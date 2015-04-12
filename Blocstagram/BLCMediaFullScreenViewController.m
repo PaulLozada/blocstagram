@@ -74,12 +74,7 @@
     
     [self.scrollView addGestureRecognizer:self.tap];
     [self.scrollView addGestureRecognizer:self.doubleTap];
-    
-    
 
-    
-    
-    
 }
 
 #pragma mark - Gesture Recognizers
@@ -103,12 +98,6 @@
     if (self.scrollView.zoomScale == self.scrollView.minimumZoomScale) {
         
         CGPoint locationPoint = [sender locationInView:self.imageView];
-        
-        
-   
-        
-        
-        
         
         CGSize scrollViewSize = self.scrollView.bounds.size;
         
