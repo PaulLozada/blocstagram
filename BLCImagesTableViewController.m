@@ -15,7 +15,7 @@
 #import "BLCMediaFullScreenViewController.h"
 #import "BLCMediaFullScreenAnimator.h"
 
-@interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,BLCMediaTableViewCellDelegate,UIViewControllerTransitioningDelegate>
+@interface BLCImagesTableViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,BLCMediaTableViewCellDelegate,UIViewControllerTransitioningDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,weak) UIImageView *lastTappedImageView;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
@@ -257,6 +257,10 @@
 }
 
 
+#pragma mark - Scroll View Delegate Methods
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -295,8 +299,16 @@
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
+    
+    
     }
-
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    BLCMedia *mediaItem = [BLCDatasource sharedInstance].mediaItems[indexPath.row];
+    if (mediaItem.downloadState == BLCMediaDownloadStateNeedsImage) {
+        [[BLCDatasource sharedInstance] downloadImageForMediaItem:mediaItem];
+    }
+}
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
