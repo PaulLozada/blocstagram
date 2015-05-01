@@ -12,7 +12,6 @@
 
 @interface BLCMediaFullScreenViewController () <UIScrollViewDelegate>
 
-@property(nonatomic,strong) BLCMedia *media;
 @property(nonatomic,strong) UITapGestureRecognizer *tap;
 @property(nonatomic,strong) UITapGestureRecognizer *doubleTap;
 
@@ -113,7 +112,12 @@
 }
 
 - (void) viewWillLayoutSubviews {
+    
+    
     [super viewWillLayoutSubviews];
+    self.scrollView.frame = self.view.bounds;
+    
+    [self recalculateZoomScale];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
@@ -121,26 +125,34 @@
     [button setTitle:@"Share" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:button];
-
+    
     [button setFrame:CGRectMake(0, 0, 568, 100)];
+    
+}
 
-    
-    
-    
-    
-    
-    self.scrollView.frame = self.view.bounds;
-    
+- (void) recalculateZoomScale {
     CGSize scrollViewFrameSize = self.scrollView.frame.size;
     CGSize scrollViewContentSize = self.scrollView.contentSize;
+    
+    scrollViewContentSize.height /= self.scrollView.zoomScale;
+    scrollViewContentSize.width /= self.scrollView.zoomScale;
     
     CGFloat scaleWidth = scrollViewFrameSize.width / scrollViewContentSize.width;
     CGFloat scaleHeight = scrollViewFrameSize.height / scrollViewContentSize.height;
     CGFloat minScale = MIN(scaleWidth, scaleHeight);
     
-    self.scrollView.minimumZoomScale = minScale;
-    self.scrollView.maximumZoomScale = 1;
+    
+    
 }
+
+    
+
+
+    
+    
+    
+    
+
 
 -(void)centerScrollView {
     [self.imageView sizeToFit];

@@ -41,7 +41,6 @@
 
 -(instancetype)initWithDictionary:(NSDictionary *)userDictionary{
     
-    
     self = [super init];
     
     if (self) {

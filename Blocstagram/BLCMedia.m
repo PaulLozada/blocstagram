@@ -14,8 +14,9 @@
 #pragma mark - NSCoding
 
 
-
 @implementation BLCMedia
+
+
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -38,6 +39,7 @@
         
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
+        self.likeState = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(likeState))];
     }
     return self;
 }
@@ -50,6 +52,7 @@
     [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
     [aCoder encodeObject:self.caption forKey:NSStringFromSelector(@selector(caption))];
     [aCoder encodeObject:self.comments forKey:NSStringFromSelector(@selector(comments))];
+    [aCoder encodeInteger:self.likeState forKey:NSStringFromSelector(@selector(likeState))];
     
 }
 
@@ -87,6 +90,13 @@
         }
         
         self.comments = commentsArray;
+        
+        BOOL userHasLiked = [mediaDictionary[@"user_has_liked"]boolValue];
+        
+        self.likeState = userHasLiked ? BLCLikeStateLiked : BLCLikeStateNotLiked;
+        
+       self.likeCount = [mediaDictionary[@"likes"][@"count"] intValue];
+
     }
     
     return self;
