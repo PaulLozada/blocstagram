@@ -51,6 +51,7 @@
         
         for (UIView *view in @[self.whiteView, self.purpleView, self.leftButton, self.cameraButton, self.rightButton]) {
             [self addSubview:view];
+    
         }
     }
     
