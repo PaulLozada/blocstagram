@@ -155,6 +155,48 @@
     
     CIImage *sourceCIImage = [CIImage imageWithCGImage:self.sourceImage.CGImage];
     
+#pragma mark - Assignment Filters
+    
+    
+    // Fade Filter
+    
+    [self.photoFilterOperationQueue addOperationWithBlock:^{
+        
+        CIFilter *fadeFilter = [CIFilter filterWithName:@"CIPhotoEffectFade"];
+        
+        if (fadeFilter) {
+            [fadeFilter setValue:sourceCIImage forKey:kCIInputImageKey];
+            [self addCIImageToCollectionView:fadeFilter.outputImage withFilterTitle:NSLocalizedString(@"Fade", @"Fade Filter")];
+            
+        }
+    }];
+
+    // Vingette filter
+    
+    [self.photoFilterOperationQueue addOperationWithBlock:^{
+        
+        CIFilter *vingetteFilter = [CIFilter filterWithName:@"CIVignetteEffect"];
+        CIFilter *monochromeFilter = [CIFilter filterWithName:@"CIColorMonochrome"];
+
+        
+        if (vingetteFilter) {
+            [vingetteFilter setValue:sourceCIImage forKey:kCIInputImageKey];
+           CIImage *firstImage = vingetteFilter.outputImage;
+            
+            if (monochromeFilter) {
+                [monochromeFilter setValue:firstImage forKey:kCIInputImageKey];
+                firstImage = monochromeFilter.outputImage;
+            }
+            
+            [self addCIImageToCollectionView:firstImage withFilterTitle:NSLocalizedString(@"VingetteChrome", @"Vingette Filter")];
+        }
+        
+        
+    }];
+    
+    
+    
+   
     // Noir Filter
     
     [self.photoFilterOperationQueue addOperationWithBlock:^{
@@ -208,8 +250,13 @@
         if (moodyFilter) {
             [moodyFilter setValue:sourceCIImage forKey:kCIInputImageKey];
             [self addCIImageToCollectionView:moodyFilter.outputImage withFilterTitle:NSLocalizedString(@"Moody", @"Moody Filter")];
+            
         }
     }];
+    
+    
+
+            
     
     
     // Drunk filter
@@ -288,8 +335,9 @@
             [self addCIImageToCollectionView:composite.outputImage withFilterTitle:NSLocalizedString(@"Film", @"Film Filter")];
         }
     }];
-}
+    
 
+}
 
 
 

@@ -10,10 +10,9 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "BLCCropImageViewController.h"
 
-@interface BLCImageLibraryViewController ( ) <BLCCropImageViewControllerDelegate>
+@interface BLCImageLibraryViewController ( ) <BLCCropImageViewControllerDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,strong) ALAssetsLibrary *library;
-
 @property (nonatomic,strong) NSMutableArray *groups;
 @property (nonatomic,strong) NSMutableArray *arrayOfAssets;
 
@@ -26,6 +25,7 @@
 -(instancetype) init {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(100, 100);
+
     
     self = [super initWithCollectionViewLayout:layout];
     
@@ -52,6 +52,11 @@
     UIImage *cancelImage = [UIImage imageNamed:@"x"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]initWithImage:cancelImage style:UIBarButtonItemStyleDone target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
+    
+//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+//    effectView.bounds = self.navigationController.navigationBar.bounds;
+    
+    
 }
 
 -(void)cancelPressed:(UIBarButtonItem*)sender{
@@ -65,15 +70,15 @@
     [super viewWillLayoutSubviews];
     
     CGFloat width = CGRectGetWidth(self.view.frame);
-    CGFloat minWidth = 100;
+    CGFloat minWidth = 110;
     NSInteger divisor = width / minWidth;
     CGFloat cellSize = width / divisor;
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(cellSize, cellSize);
     flowLayout.minimumInteritemSpacing = 0;
-    flowLayout.minimumLineSpacing = 0;
-    flowLayout.headerReferenceSize = CGSizeMake(width, 30);
+    flowLayout.minimumLineSpacing = 1;
+    flowLayout.headerReferenceSize = CGSizeMake(width, 40);
     
 }
 
@@ -223,6 +228,20 @@
     cropVC.delegate = self;
     [self.navigationController pushViewController:cropVC animated:YES];
 }
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    CGSize size = CGSizeMake(50 ,100);
+    
+    
+
+    return size;
+    
+}
+
 
 #pragma mark - BLCCropImageViewControllerDelegate
 

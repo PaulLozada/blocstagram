@@ -148,22 +148,6 @@
     return  image;
 }
 
-//- (UIImage *) imageByDoingAllTheWork:(NSData *)data {
-//    
-//}
-
-//NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-//
-//
-//UIImage *image = [UIImage imageWithData:imageData scale:[UIScreen mainScreen].scale];
-//image = [image imageWithFixedOrientation];
-//
-//CGRect gridRect = self.cropBox.frame;
-//CGRect cropRect = gridRect;
-//cropRect.origin.x = (CGRectGetMinX(gridRect) + (image.size.width - CGRectGetWidth(gridRect)) / 2);
-//
-//image = [image imageByScalingToSize:self.captureVideoPreviewLayer.bounds.size andCroppingWithRect:cropRect];
-
 
 
 @end
