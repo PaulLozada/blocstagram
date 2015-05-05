@@ -119,14 +119,17 @@
     
     [self recalculateZoomScale];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
-    button.tintColor = [UIColor blackColor];
-    [button setTitle:@"Share" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.view addSubview:button];
     
-    [button setFrame:CGRectMake(0, 0, 568, 100)];
+    // Assignment Button
+    
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button addTarget:self action:@selector(pressedDisclosure:) forControlEvents:UIControlEventTouchUpInside];
+//    button.tintColor = [UIColor blackColor];
+//    [button setTitle:@"Share" forState:UIControlStateNormal];
+//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [self.view addSubview:button];
+//    
+//    [button setFrame:CGRectMake(0, 0, 568, 100)];
     
 }
 

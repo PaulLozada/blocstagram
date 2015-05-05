@@ -23,6 +23,7 @@
 
 
 -(instancetype) init {
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(100, 100);
 
@@ -49,12 +50,19 @@
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
+    //TITLE BAR TINT
+    
+    self.navigationController.navigationBar.translucent = YES;
+    
+    
+    
     UIImage *cancelImage = [UIImage imageNamed:@"x"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]initWithImage:cancelImage style:UIBarButtonItemStyleDone target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-//    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-//    effectView.bounds = self.navigationController.navigationBar.bounds;
+    
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    effectView.bounds = self.navigationController.navigationBar.bounds;
     
     
 }
@@ -114,11 +122,13 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+    
     [super viewWillDisappear:animated];
     
     [self.groups removeAllObjects];
     [self.arrayOfAssets removeAllObjects];
     [self.collectionView reloadData];
+    
 }
 
 
@@ -214,6 +224,7 @@
 
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     ALAsset *asset = self.arrayOfAssets[indexPath.section][indexPath.row];
     ALAssetRepresentation *representation = asset.defaultRepresentation;
     CGImageRef imageRef = representation.fullResolutionImage;
@@ -233,11 +244,12 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSInteger numberOfImages = indexPath.row;
+    numberOfImages++;
     
-    CGSize size = CGSizeMake(50 ,100);
+    NSLog(@"%lu",numberOfImages);
     
-    
-
+    CGSize size = CGSizeMake(numberOfImages + 15 , 5 + numberOfImages);
     return size;
     
 }
