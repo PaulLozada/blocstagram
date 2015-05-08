@@ -14,6 +14,7 @@
 
 @property(nonatomic,strong) UITapGestureRecognizer *tap;
 @property(nonatomic,strong) UITapGestureRecognizer *doubleTap;
+@property(nonatomic,strong) UITapGestureRecognizer *tapBehind;
 
 
 @end
@@ -34,7 +35,35 @@
     [super viewWillAppear:animated];
     [self centerScrollView];
     
+    if (isPhone == NO) {
+        [[[[UIApplication sharedApplication]delegate]window]addGestureRecognizer:self.tapBehind];
+    }
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    if (isPhone) {
+        [[[[UIApplication sharedApplication]delegate]window]removeGestureRecognizer:self.tapBehind];
+    }
+}
+
+- (void) tapBehindFired:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [sender locationInView:nil]; // Passing nil gives us coordinates in the window
+        CGPoint locationInVC = [self.presentedViewController.view convertPoint:location fromView:self.view.window];
+        
+        if ([self.presentedViewController.view pointInside:locationInVC withEvent:nil] == NO) {
+            // The tap was outside the VC's view
+            
+            if (self.presentingViewController) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+    }
+}
+
 -(instancetype) initWithMedia:(BLCMedia *)media {
     self = [super init];
     
@@ -70,6 +99,11 @@
     self.doubleTap.numberOfTapsRequired = 2 ;
     
     [self.tap requireGestureRecognizerToFail:self.doubleTap];
+    
+    if (isPhone == NO) {
+        self.tapBehind = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapBehindFired:)];
+        self.tapBehind.cancelsTouchesInView = NO;
+    }
     
     [self.scrollView addGestureRecognizer:self.tap];
     [self.scrollView addGestureRecognizer:self.doubleTap];

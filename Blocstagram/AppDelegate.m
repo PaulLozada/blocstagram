@@ -66,7 +66,6 @@
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
    
-
     return YES;
     
 }

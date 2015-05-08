@@ -244,12 +244,15 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSInteger numberOfImages = indexPath.row;
-    numberOfImages++;
+//    NSInteger numberOfImages = indexPath.row;
+//    numberOfImages++;
+//    
+//    NSLog(@"%lu",numberOfImages);
+//    
+//    CGSize size = CGSizeMake(numberOfImages + 15 , 5 + numberOfImages);
     
-    NSLog(@"%lu",numberOfImages);
+    CGSize size = CGSizeMake(50, 100);
     
-    CGSize size = CGSizeMake(numberOfImages + 15 , 5 + numberOfImages);
     return size;
     
 }

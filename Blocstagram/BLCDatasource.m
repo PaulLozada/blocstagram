@@ -31,6 +31,11 @@
 
 @implementation BLCDatasource
 
+NSString *const BLCImageFinishedNotification = @"BLCImageFinishedNotification";
+
+
+
+
 - (NSString *) pathForFilename:(NSString *) filename {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths firstObject];

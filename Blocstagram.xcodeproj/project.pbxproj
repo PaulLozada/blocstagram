@@ -96,8 +96,10 @@
 		333D34351AC5CF9A00D22AFD /* BLCDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCDatasource.m; sourceTree = "<group>"; };
 		333D34371AC5D1F300D22AFD /* BLCMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLCMediaTableViewCell.h; path = ../BLCMediaTableViewCell.h; sourceTree = "<group>"; };
 		333D34381AC5D1F300D22AFD /* BLCMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLCMediaTableViewCell.m; path = ../BLCMediaTableViewCell.m; sourceTree = "<group>"; };
+		3381A0921AFBB94F00E3CABD /* Blocstagram-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Blocstagram-Prefix.pch"; sourceTree = "<group>"; };
 		33A7298C1AC7744600DA60B7 /* BLCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLoginViewController.h; sourceTree = "<group>"; };
 		33A7298D1AC7744600DA60B7 /* BLCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCLoginViewController.m; sourceTree = "<group>"; };
+		33AA5F371AF86E3500ABED16 /* Blocstagram-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Blocstagram-Prefix.pch"; sourceTree = "<group>"; };
 		33BA3F001ADF5B9F00A213D4 /* BLCCircleSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCCircleSpinnerView.h; sourceTree = "<group>"; };
 		33BA3F011ADF5B9F00A213D4 /* BLCCircleSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLCCircleSpinnerView.m; sourceTree = "<group>"; };
 		33BA3F031ADF8AD900A213D4 /* BLCLikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLCLikeButton.h; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		333D33E91AC5B83F00D22AFD /* Blocstagram */ = {
 			isa = PBXGroup;
 			children = (
+				3381A0921AFBB94F00E3CABD /* Blocstagram-Prefix.pch */,
 				333D33EE1AC5B83F00D22AFD /* AppDelegate.h */,
 				333D33EF1AC5B83F00D22AFD /* AppDelegate.m */,
 				333B68831AE0956F002B3D9F /* BLCCameraToolbar.h */,
@@ -233,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				333D34051AC5B83F00D22AFD /* Info.plist */,
+				33AA5F371AF86E3500ABED16 /* Blocstagram-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -565,6 +569,8 @@
 			baseConfigurationReference = 780D0CEFDDE4E9DBF9901AF2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Blocstagram/Blocstagram-Prefix.pch";
 				INFOPLIST_FILE = Blocstagram/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -577,6 +583,8 @@
 			baseConfigurationReference = 0B909DE0E0AE4E93BEBC3914 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Blocstagram/Blocstagram-Prefix.pch";
 				INFOPLIST_FILE = Blocstagram/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
